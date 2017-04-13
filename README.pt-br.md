@@ -7,20 +7,20 @@
 [![bitHound Score](https://www.bithound.io/github/gotwarlost/istanbul/badges/score.svg)](https://www.bithound.io/github/polutz/ptz-log)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-Awesome log and types for javascript and typescript!
+Excelente log e tipagem para javascript e typescript!
 
-## Translations
+## Traduções
 [pt-br](https://github.com/polutz/ptz-log/blob/master/README.pt-br.md)
 [en-us](https://github.com/polutz/ptz-log/blob/master/README.md)
 
-## Use
+## Como usar
 
-### Install
+### Instalação
 ```
     npm install --save ptz-log
 ```
 
-### How to use
+### Como usar
 ```javasript
     import log from 'ptz-log';
 
@@ -29,7 +29,7 @@ Awesome log and types for javascript and typescript!
     log('welcome', 'to', 'polutz!');
 ```
 
-How to use Ilog type as dependency injection, and provide your custom logs
+Como usar o tipo Ilog como injeção de depêndencia para prover seus logs customizados
 ```javasript
     import { Ilog, log } from 'ptz-log';
 
@@ -56,19 +56,19 @@ How to use Ilog type as dependency injection, and provide your custom logs
 
 
 
-## Contribute
+## Contribuir com o projeto
 
 ### NPM Global packages
 ```
     npm install -g ts-node babel-cli
 ```
 
-### Setup
+### Instalação
 ```
     npm install   
 ```
 
-### Test
+### Teste
 ```
     npm test
 ```
