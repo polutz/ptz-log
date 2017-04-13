@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = log;
+exports.log = undefined;
 
 var _moment = require('moment');
 
@@ -11,7 +11,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function log() {
+var log = function log() {
     var _console;
 
     console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
@@ -23,5 +23,7 @@ function log() {
 
     (_console = console).log.apply(_console, [''].concat(args));
     console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
-}
+};
+exports.default = log;
+exports.log = log;
 //# sourceMappingURL=index.js.map
