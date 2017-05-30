@@ -9,9 +9,23 @@ const log: Ilog = function log(...args: any[]): void {
     console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
 };
 
+/**
+ * Logs any function args and return outputs.
+ * @param log log function like ptz-log or console.log.
+ * @param fn function to be logged.
+ * @param args params to pass to fn.
+ */
+function logInOut(flog, fn, ...args): any {
+    flog('in: \n', args);
+    const out = fn(...args);
+    flog('out: \n', out);
+    return out;
+}
+
 export default log;
 
 export {
     log,
+    logInOut,
     Ilog
 };
