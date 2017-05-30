@@ -1,7 +1,13 @@
 import moment from 'moment';
 
+/**
+ * Log function type
+ */
 type ILog = (...args: any[]) => void;
 
+/**
+ * Log function
+ */
 const log: ILog = function log(...args: any[]): void {
     console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));

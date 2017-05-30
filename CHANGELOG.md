@@ -1,6 +1,11 @@
 ## master
 
 
+## 1.1.0 (May 30, 2017)
+
+* Add logInOut.
+* Update Ilog type to ILog.
+
 ## 1.0.1 (April 13, 2017)
 
 * Add Ilog type.
