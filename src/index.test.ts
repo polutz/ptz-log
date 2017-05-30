@@ -1,6 +1,6 @@
 import * as assert from 'ptz-assert';
 import log, { logInOut } from './index';
-import { Ilog, log as logDestructure } from './index';
+import { ILog, log as logDestructure } from './index';
 
 describe('log', () => {
     it('import default', () => {
