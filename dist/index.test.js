@@ -43,4 +43,14 @@ describe('logInOut', function () {
         (0, _index.logInOut)(logTest, add, 1, 2);
     });
 });
+describe('logColor', function () {
+    it('import logColor ', function () {
+        (0, _index.logColor)('default expression');
+        (0, _index.logColor)('default expression', 'another default expression');
+        (0, _index.logColor)({ color: 'cyan' }, 'cyan expression', { color: 'yellow' }, 'yellow expression');
+        (0, _index.logColor)('default expression');
+        (0, _index.logColor)({ color: 'green' }, 'green expression', { color: 'red' }, 'red expression');
+        (0, _index.logColor)({ color: 'green' }, 'green expression', { color: 'reset' }, 'default expression');
+    });
+});
 //# sourceMappingURL=index.test.js.map

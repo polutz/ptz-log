@@ -1,10 +1,4 @@
 import moment from 'moment';
-
-/**
- * Log function type
- */
-type ILogColor = (colors, ...args: any[]) => void;
-
 const logColors = {
     reset: '\x1b[0m', bright: '\x1b[1m',
     dim: '\x1b[2m', underscore: '\x1b[4m',
@@ -15,56 +9,30 @@ const logColors = {
     magenta: '\x1b[35m', cyan: '\x1b[36m',
     white: '\x1b[37m'
 };
-/**
- * Colored log function
- *
- * Available options: reset, bright, dim, underscore, blink, reverse, hidden
- * Available colors: black, red, green, yellow, blue, magenta, cyan, white
- */
-const logColor: ILogColor = function log(...args: any[]): void {
+const logColor = function log(...args) {
     console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
     let color = '';
     args.map((arg, i) => {
-        if (arg.color) return color = logColors[arg.color];
-
-        if (typeof arg === 'string' && arg !== '') return console.log(color, '', arg);
+        if (arg.color)
+            return color = logColors[arg.color];
+        if (typeof arg === 'string' && arg !== '')
+            return console.log(color, '', arg);
     });
     console.log(logColors.reset, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
 };
-/**
- * Log function type
- */
-type ILog = (...args: any[]) => void;
-
-/**
- * Log function
- */
-const log: ILog = function log(...args: any[]): void {
+const log = function log(...args) {
     console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
     console.log('', ...args);
     console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
 };
-
-/**
- * Logs any function args and return outputs.
- * @param log log function like ptz-log or console.log.
- * @param fn function to be logged.
- * @param args params to pass to fn.
- */
-function logInOut(flog, fn, ...args): any {
+function logInOut(flog, fn, ...args) {
     flog('in: \n', args);
     const out = fn(...args);
     flog('out: \n', out);
     return out;
 }
-
 export default log;
-
-export {
-    log,
-    logInOut,
-    ILog,
-    logColor
-};
+export { log, logInOut, logColor };
+//# sourceMappingURL=index.js.map

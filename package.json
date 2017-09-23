@@ -6,9 +6,12 @@
   "typings": "src/index.ts",
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
-    "js": "rimraf dist && tsc && babel dist -d dist --presets es2015",
+    "js": "rimraf dist-esnext && tsc && babel dist-esnext -d dist --presets es2015",
+    "tsc:w":"rimraf dist-esnext && tsc -w",
+    "babel:w":" rimraf dist && babel dist-esnext --watch -d dist --presets es2015",
     "pretest": "npm-run-all --parallel js lint",
     "mocha": "mocha ./dist/**/*.js --require babel-polyfill",
+    "mocha:w": "mocha --watch ./dist/**/*.js --require babel-polyfill",
     "test": "nyc npm run mocha && nyc report --reporter=text-lcov > coverage.lcov && codecov --token=967f3c1a-c27c-4a43-b22a-c473b5313bf5",
     "predebug": "npm run pretest",
     "debug": "node --nolazy --debug-brk=5858 dist/index.js"
