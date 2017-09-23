@@ -38,9 +38,9 @@ describe('Log', function () {
     it('should print arrays ', function () {
         (0, _index2.default)({ color: 'yellow' }, 'yellow array', ['wor1', 'word2']);
     });
-    it('should print funcions ', function () {
+    it('should print functions ', function () {
         (0, _index2.default)({ color: 'blue' }, 'blue function', function () {
-            return ['wor1', 'word2'];
+            return ['word1', 'word2'];
         });
     });
     it('should print NaN ', function () {

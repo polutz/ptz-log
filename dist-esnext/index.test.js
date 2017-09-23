@@ -27,8 +27,8 @@ describe('Log', () => {
     it('should print arrays ', () => {
         log({ color: 'yellow' }, 'yellow array', ['wor1', 'word2']);
     });
-    it('should print funcions ', () => {
-        log({ color: 'blue' }, 'blue function', () => ['wor1', 'word2']);
+    it('should print functions ', () => {
+        log({ color: 'blue' }, 'blue function', () => ['word1', 'word2']);
     });
     it('should print NaN ', () => {
         log({ color: 'red' }, 'red NaN', NaN);

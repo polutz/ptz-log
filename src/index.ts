@@ -7,16 +7,16 @@ type ILog = (colors, ...args: any[]) => void;
 
 const logColors = {
     // Options
-    reset: '\x1b[0m', bright: '\x1b[1m',
-    dim: '\x1b[2m', underscore: '\x1b[4m',
-    blink: '\x1b[5m', reverse: '\x1b[7m',
-    hidden: '\x1b[8m',
+    reset: `\x1b[0m`, bright: `\x1b[1m`,
+    dim: `\x1b[2m`, underscore: `\x1b[4m`,
+    blink: `\x1b[5m`, reverse: `\x1b[7m`,
+    hidden: `\x1b[8m`,
     // Collors
-    black: '\x1b[30m',
-    red: '\x1b[31m', green: '\x1b[32m',
-    yellow: '\x1b[33m', blue: '\x1b[34m',
-    magenta: '\x1b[35m', cyan: '\x1b[36m',
-    white: '\x1b[37m'
+    black: `\x1b[30m`,
+    red: `\x1b[31m`, green: `\x1b[32m`,
+    yellow: `\x1b[33m`, blue: `\x1b[34m`,
+    magenta: `\x1b[35m`, cyan: `\x1b[36m`,
+    white: `\x1b[37m`
 };
 /**
  * Colored log function
@@ -25,18 +25,18 @@ const logColors = {
  * Available colors: black, red, green, yellow, blue, magenta, cyan, white
  */
 const log: ILog = function log(...args: any[]): void {
-    console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+    console.log(`\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
-    let color = '';
+    let color = ``;
     args.map((arg, i) => {
         if (arg === null || arg === undefined)
-            return console.log(color, '', arg);
+            return console.log(`${color} ${arg}`);
 
-        if (arg.color) return color = logColors[arg.color] ||  color || '';
+        if (arg.color) return color = logColors[arg.color] ||  color || ``;
 
-        if (arg !== '') return console.log(color, '', arg);
+        if (arg !== '') return console.log(`${color} ${arg}`);
     });
-    console.log(logColors.reset, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
+    console.log(`${logColors.reset}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n`);
 };
 
 /**
