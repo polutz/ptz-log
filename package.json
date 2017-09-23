@@ -6,7 +6,7 @@
   "typings": "src/index.ts",
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
-    "js": "rimraf dist-esnext && tsc && babel dist-esnext -d dist --presets es2015",
+    "js": "rimraf dist-esnext && tsc && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
     "tsc:w":"rimraf dist-esnext && tsc -w",
     "babel:w":" rimraf dist && babel dist-esnext --watch -d dist --presets es2015",
     "pretest": "npm-run-all --parallel js lint",

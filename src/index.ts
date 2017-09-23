@@ -3,7 +3,7 @@ import moment from 'moment';
 /**
  * Log function type
  */
-type ILogColor = (colors, ...args: any[]) => void;
+type ILog = (colors, ...args: any[]) => void;
 
 const logColors = {
     reset: '\x1b[0m', bright: '\x1b[1m',
@@ -21,30 +21,19 @@ const logColors = {
  * Available options: reset, bright, dim, underscore, blink, reverse, hidden
  * Available colors: black, red, green, yellow, blue, magenta, cyan, white
  */
-const logColor: ILogColor = function log(...args: any[]): void {
+const log: ILog = function log(...args: any[]): void {
     console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
     let color = '';
     args.map((arg, i) => {
+        if (arg === null || arg === undefined)
+            return console.log(color, '', arg);
+
         if (arg.color) return color = logColors[arg.color];
 
         if (typeof arg === 'string' && arg !== '') return console.log(color, '', arg);
     });
     console.log(logColors.reset, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
-};
-/**
- * Log function type
- */
-type ILog = (...args: any[]) => void;
-
-/**
- * Log function
- */
-const log: ILog = function log(...args: any[]): void {
-    console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-    console.log(moment().format('H:mm:ss MMMM Do YYYY'));
-    console.log('', ...args);
-    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
 };
 
 /**
@@ -66,5 +55,4 @@ export {
     log,
     logInOut,
     ILog,
-    logColor
 };

@@ -9,23 +9,19 @@ const logColors = {
     magenta: '\x1b[35m', cyan: '\x1b[36m',
     white: '\x1b[37m'
 };
-const logColor = function log(...args) {
+const log = function log(...args) {
     console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
     let color = '';
     args.map((arg, i) => {
+        if (arg === null || arg === undefined)
+            return console.log(color, '', arg);
         if (arg.color)
             return color = logColors[arg.color];
         if (typeof arg === 'string' && arg !== '')
             return console.log(color, '', arg);
     });
     console.log(logColors.reset, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
-};
-const log = function log(...args) {
-    console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-    console.log(moment().format('H:mm:ss MMMM Do YYYY'));
-    console.log('', ...args);
-    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
 };
 function logInOut(flog, fn, ...args) {
     flog('in: \n', args);
@@ -34,5 +30,5 @@ function logInOut(flog, fn, ...args) {
     return out;
 }
 export default log;
-export { log, logInOut, logColor };
+export { log, logInOut, };
 //# sourceMappingURL=index.js.map

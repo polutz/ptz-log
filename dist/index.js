@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.logColor = exports.logInOut = exports.log = undefined;
+exports.logInOut = exports.log = undefined;
 
 var _moment = require('moment');
 
@@ -21,7 +21,7 @@ var logColors = {
     magenta: '\x1b[35m', cyan: '\x1b[36m',
     white: '\x1b[37m'
 };
-var logColor = function log() {
+var log = function log() {
     console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     console.log((0, _moment2.default)().format('H:mm:ss MMMM Do YYYY'));
     var color = '';
@@ -31,27 +31,15 @@ var logColor = function log() {
     }
 
     args.map(function (arg, i) {
+        if (arg === null || arg === undefined) return console.log(color, '', arg);
         if (arg.color) return color = logColors[arg.color];
         if (typeof arg === 'string' && arg !== '') return console.log(color, '', arg);
     });
     console.log(logColors.reset, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
 };
-var log = function log() {
-    var _console;
-
-    console.log('\n', '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-    console.log((0, _moment2.default)().format('H:mm:ss MMMM Do YYYY'));
-
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-    }
-
-    (_console = console).log.apply(_console, [''].concat(args));
-    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', '\n');
-};
 function logInOut(flog, fn) {
-    for (var _len3 = arguments.length, args = Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
-        args[_key3 - 2] = arguments[_key3];
+    for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
     }
 
     flog('in: \n', args);
@@ -62,5 +50,4 @@ function logInOut(flog, fn) {
 exports.default = log;
 exports.log = log;
 exports.logInOut = logInOut;
-exports.logColor = logColor;
 //# sourceMappingURL=index.js.map

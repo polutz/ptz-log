@@ -1,16 +1,39 @@
 import * as assert from 'ptz-assert';
 import log, { logInOut } from './index';
-import {  log as logDestructure, logColor} from './index';
+import { log as logDestructure } from './index';
 
-describe('log', () => {
+describe('Log', () => {
     it('import default', () => {
         log('abc');
         log('abc', 'def');
     });
-
     it('import destructure', () => {
         logDestructure('abc_Destructure');
         logDestructure('abc_Destructure', 'def_Destructure');
+    });
+
+    it('default log', () => {
+        log('default expression');
+        log('default expression', 'another default expression');
+    });
+
+    it('colored log ', () => {
+        log({ color: 'cyan' }, 'cyan expression', { color: 'yellow' }, 'yellow expression');
+
+        log('default expression');
+        log({ color: 'green' }, 'green expression', { color: 'red' }, 'red expression');
+        log({ color: 'green' }, 'green expression', { color: 'reset' }, 'default expression');
+
+    });
+    it('should print null and undefined ', () => {
+        log({ color: 'green' }, undefined, { color: 'red' }, 'red expression');
+        log({ color: 'green' }, null, { color: 'reset' }, 'default expression');
+    });
+
+    it.only('should print objects ', () => {
+        const obj = { teste: 'teste' };
+
+        log({ color: 'green' }, obj, { color: 'red' }, 'red expression');
     });
 });
 
@@ -27,18 +50,5 @@ describe('logInOut', () => {
         }
 
         logInOut(logTest, add, 1, 2);
-    });
-});
-
-describe('logColor', () => {
-    it('import logColor ', () => {
-        logColor('default expression');
-        logColor('default expression', 'another default expression');
-
-        logColor({ color: 'cyan' }, 'cyan expression', { color: 'yellow' }, 'yellow expression');
-
-        logColor('default expression');
-        logColor({ color: 'green' }, 'green expression', { color: 'red' }, 'red expression');
-        logColor({ color: 'green' }, 'green expression', { color: 'reset' }, 'default expression');
     });
 });
