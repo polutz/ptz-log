@@ -23,20 +23,22 @@ var logColors = {
     white: '\x1B[37m'
 };
 var log = function log() {
-    console.log('\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-    console.log((0, _moment2.default)().format('H:mm:ss MMMM Do YYYY'));
-    var color = '';
-
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
     }
 
+    console.log('\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+    console.log((0, _moment2.default)().format('H:mm:ss MMMM Do YYYY'));
+    var color = '';
+    var lastArg = {};
+    var txt = '';
     args.map(function (arg, i) {
-        if (arg === null || arg === undefined) return console.log(color + ' ' + arg);
+        if (i) lastArg = args[i - 1];
+        if (arg === null || arg === undefined) return txt += color + ' ' + arg;
         if (arg.color) return color = logColors[arg.color] || color || '';
-        if (arg !== '') return console.log(color + ' ' + arg);
+        if (arg !== '') return txt += color + ' ' + arg + (!lastArg.color ? '' : '\n');
     });
-    console.log(logColors.reset + '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n');
+    console.log(txt + logColors.reset + '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n');
 };
 function logInOut(flog, fn) {
     for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
@@ -51,5 +53,4 @@ function logInOut(flog, fn) {
 exports.default = log;
 exports.log = log;
 exports.logInOut = logInOut;
-//# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

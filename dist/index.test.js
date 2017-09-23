@@ -25,8 +25,7 @@ describe('Log', function () {
         (0, _index2.default)({ color: 'green' }, { color: 'invalid' }, 'invalid color chosen, using previous');
     });
     it('colored log ', function () {
-        (0, _index2.default)({ color: 'cyan' }, 'cyan expression', { color: 'yellow' }, 'yellow expression');
-        (0, _index2.default)({ color: 'green' }, 'green expression', { color: 'red' }, 'red expression');
+        (0, _index2.default)({ color: 'green' }, 'green expression', { color: 'yellow' }, 'yellow expression', { color: 'red' }, 'red expression');
     });
     it('should print null and undefined ', function () {
         (0, _index2.default)({ color: 'magenta' }, 'magenta undefinded', undefined);
@@ -63,6 +62,7 @@ describe('Log', function () {
         (0, _index2.default)({ color: 'green' }, 'promise resolved', promiseResolved);
         var promiseRejected = await rejectPromise(false);
         (0, _index2.default)({ color: 'red' }, 'promise rejected', promiseRejected);
+        (0, _index2.default)('returning', { color: 'green' }, 'true!', 'false');
     });
 });
 describe('logInOut', function () {
@@ -93,5 +93,4 @@ var testPromise = function testPromise(fail) {
         }, 10);
     });
 };
-//# sourceMappingURL=index.test.js.map
 //# sourceMappingURL=index.test.js.map

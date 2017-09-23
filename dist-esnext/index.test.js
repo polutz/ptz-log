@@ -14,8 +14,7 @@ describe('Log', () => {
         log({ color: 'green' }, { color: 'invalid' }, 'invalid color chosen, using previous');
     });
     it('colored log ', () => {
-        log({ color: 'cyan' }, 'cyan expression', { color: 'yellow' }, 'yellow expression');
-        log({ color: 'green' }, 'green expression', { color: 'red' }, 'red expression');
+        log({ color: 'green' }, 'green expression', { color: 'yellow' }, 'yellow expression', { color: 'red' }, 'red expression');
     });
     it('should print null and undefined ', () => {
         log({ color: 'magenta' }, 'magenta undefinded', undefined);
@@ -51,6 +50,7 @@ describe('Log', () => {
         log({ color: 'green' }, 'promise resolved', promiseResolved);
         const promiseRejected = await rejectPromise(false);
         log({ color: 'red' }, 'promise rejected', promiseRejected);
+        log('returning', { color: 'green' }, 'true!', 'false');
     });
 });
 describe('logInOut', () => {

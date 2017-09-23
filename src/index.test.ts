@@ -18,8 +18,9 @@ describe('Log', () => {
     });
 
     it('colored log ', () => {
-        log({ color: 'cyan' }, 'cyan expression', { color: 'yellow' }, 'yellow expression');
-        log({ color: 'green' }, 'green expression', { color: 'red' }, 'red expression');
+        log({ color: 'green' }, 'green expression',
+            { color: 'yellow' }, 'yellow expression',
+            { color: 'red' }, 'red expression');
 
     });
 
@@ -66,6 +67,7 @@ describe('Log', () => {
         const promiseRejected = await rejectPromise(false);
         log({ color: 'red' }, 'promise rejected', promiseRejected);
 
+        log('returning', { color: 'green'}, 'true!', 'false');
     });
 });
 

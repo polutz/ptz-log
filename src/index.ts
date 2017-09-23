@@ -28,15 +28,20 @@ const log: ILog = function log(...args: any[]): void {
     console.log(`\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
     let color = ``;
+    let lastArg: any = {};
+    let txt = '';
     args.map((arg, i) => {
+        if (i)
+            lastArg = args[i - 1];
         if (arg === null || arg === undefined)
-            return console.log(`${color} ${arg}`);
+            return txt += `${color} ${arg}`;
 
-        if (arg.color) return color = logColors[arg.color] ||  color || ``;
+        if (arg.color) return color = logColors[arg.color] || color || ``;
 
-        if (arg !== '') return console.log(`${color} ${arg}`);
+        if (arg !== '') return txt += `${color} ${arg}${!lastArg.color ? '' : '\n'}`;
     });
-    console.log(`${logColors.reset}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n`);
+    console.log(`${txt + logColors.reset}
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n`);
 };
 
 /**
