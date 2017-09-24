@@ -18,6 +18,7 @@ const logColors = {
     magenta: `\x1b[35m`, cyan: `\x1b[36m`,
     white: `\x1b[37m`
 };
+
 /**
  * Colored log function
  *
@@ -27,23 +28,23 @@ const logColors = {
 const log: ILog = function log(...args: any[]): void {
     console.log(`\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
-    let color = ``;
+    let ptzColorLog = ``;
     let lastArg: any = {};
     let txt = '';
     args.map((arg, i) => {
         if (i) {
             lastArg = Object.assign({}, args[i - 1]);
 
-            txt += `${lastArg.hasOwnProperty('color')
+            txt += `${lastArg.hasOwnProperty('ptzColorLog')
                 ? ''
                 : '\n'}${
-                color}`;
+                ptzColorLog}`;
         }
 
         if (arg === null || arg === undefined)
-            return txt += `${color}${arg} `;
+            return txt += `${ptzColorLog}${arg} `;
 
-        if (arg.color) return color = logColors[arg.color] || color || ``;
+        if (arg.ptzColorLog) return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || ``;
 
         if (arg !== '')
             return txt += `${

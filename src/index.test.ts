@@ -1,58 +1,53 @@
 import * as assert from 'ptz-assert';
-import log, { logInOut } from './index';
-import { log as logDestructure } from './index';
+import log from './index';
+import { logInOut } from './index';
 
 describe('Log', () => {
-    it('import destructure', () => {
-        logDestructure('abc_Destructure');
-        logDestructure('abc_Destructure', 'def_Destructure');
-    });
-
     it('default log', () => {
         log('default expression');
         log(`default expression another default expression`);
     });
 
-    it('use previous color if invalid color', () => {
-        log({ color: 'green' }, { color: 'invalid' }, 'invalid color chosen, using previous');
+    it('use previous ptzColorLog if invalid ptzColorLog', () => {
+        log({ ptzColorLog: 'green' }, { ptzColorLog: 'invalid' }, 'invalid ptzColorLog chosen, using previous');
     });
 
     it('colored log ', () => {
-        log({ color: 'green' }, 'green expression',
-            { color: 'yellow' }, 'yellow expression',
-            { color: 'red' }, 'red expression');
+        log({ ptzColorLog: 'green' }, 'green expression',
+            { ptzColorLog: 'yellow' }, 'yellow expression',
+            { ptzColorLog: 'red' }, 'red expression');
 
     });
 
     it('should print null and undefined ', () => {
-        log({ color: 'magenta' }, 'magenta undefinded', undefined);
-        log({ color: 'yellow' }, 'yellow null', null);
+        log({ ptzColorLog: 'magenta' }, 'magenta undefinded', undefined);
+        log({ ptzColorLog: 'yellow' }, 'yellow null', null);
     });
 
     it('should print objects ', () => {
-        log({ color: 'green' }, 'green object', { teste: 'teste' });
+        log({ ptzColorLog: 'green' }, 'green object', { teste: 'teste' });
     });
 
     it('should print arrays ', () => {
-        log({ color: 'yellow' }, 'yellow array', ['wor1', 'word2']);
+        log({ ptzColorLog: 'yellow' }, 'yellow array', ['wor1', 'word2']);
     });
 
     it('should print functions ', () => {
-        log({ color: 'blue' }, 'blue function', () => ['word1', 'word2']);
+        log({ ptzColorLog: 'blue' }, 'blue function', () => ['word1', 'word2']);
     });
 
     it('should print NaN ', () => {
-        log({ color: 'red' }, 'red NaN', NaN);
+        log({ ptzColorLog: 'red' }, 'red NaN', NaN);
     });
 
     it('should print number ', () => {
-        log({ color: 'cyan' }, 'cyan number', 666);
+        log({ ptzColorLog: 'cyan' }, 'cyan number', 666);
     });
 
     describe('Loging Objects', () => {
         it('should print promise ', async () => {
             const promise = testPromise(true);
-            log({ color: 'yellow' }, 'promise pending', promise);
+            log({ ptzColorLog: 'yellow' }, 'promise pending', promise);
 
             const rejectPromise = async (fail: boolean) => {
                 try {
@@ -63,12 +58,12 @@ describe('Log', () => {
             };
 
             const promiseResolved = await testPromise(true);
-            log({ color: 'green' }, 'promise resolved', promiseResolved);
+            log({ ptzColorLog: 'green' }, 'promise resolved', promiseResolved);
 
             const promiseRejected = await rejectPromise(false);
-            log({ color: 'red' }, 'promise rejected', promiseRejected);
+            log({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
 
-            log('returning', { color: 'green' }, 'true!', 'false');
+            log({ ptzColorLog: 'red' }, 'welcome', { ptzColorLog: 'yellow' }, 'to', { ptzColorLog: 'green' }, 'polutz!');
         });
     });
 });
