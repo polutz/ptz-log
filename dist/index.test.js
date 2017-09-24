@@ -12,6 +12,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 describe('Log', function () {
     it('default log', function () {
         (0, _index2.default)('default expression');
@@ -45,22 +47,70 @@ describe('Log', function () {
         (0, _index2.default)({ ptzColorLog: 'cyan' }, 'cyan number', 666);
     });
     describe('Loging Objects', function () {
-        it('should print promise ', async function () {
-            var promise = testPromise(true);
-            (0, _index2.default)({ ptzColorLog: 'yellow' }, 'promise pending', promise);
-            var rejectPromise = async function rejectPromise(fail) {
-                try {
-                    return await testPromise(false);
-                } catch (error) {
-                    return error;
+        it('should print promise ', _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            var promise, rejectPromise, promiseResolved, promiseRejected;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            promise = testPromise(true);
+
+                            (0, _index2.default)({ ptzColorLog: 'yellow' }, 'promise pending', promise);
+
+                            rejectPromise = function () {
+                                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(fail) {
+                                    return regeneratorRuntime.wrap(function _callee$(_context) {
+                                        while (1) {
+                                            switch (_context.prev = _context.next) {
+                                                case 0:
+                                                    _context.prev = 0;
+                                                    _context.next = 3;
+                                                    return testPromise(false);
+
+                                                case 3:
+                                                    return _context.abrupt('return', _context.sent);
+
+                                                case 6:
+                                                    _context.prev = 6;
+                                                    _context.t0 = _context['catch'](0);
+                                                    return _context.abrupt('return', _context.t0);
+
+                                                case 9:
+                                                case 'end':
+                                                    return _context.stop();
+                                            }
+                                        }
+                                    }, _callee, undefined, [[0, 6]]);
+                                }));
+
+                                return function rejectPromise(_x) {
+                                    return _ref2.apply(this, arguments);
+                                };
+                            }();
+
+                            _context2.next = 5;
+                            return testPromise(true);
+
+                        case 5:
+                            promiseResolved = _context2.sent;
+
+                            (0, _index2.default)({ ptzColorLog: 'green' }, 'promise resolved', promiseResolved);
+                            _context2.next = 9;
+                            return rejectPromise(false);
+
+                        case 9:
+                            promiseRejected = _context2.sent;
+
+                            (0, _index2.default)({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
+                            (0, _index2.default)({ ptzColorLog: 'red' }, 'welcome', { ptzColorLog: 'yellow' }, 'to', { ptzColorLog: 'green' }, 'polutz!');
+
+                        case 12:
+                        case 'end':
+                            return _context2.stop();
+                    }
                 }
-            };
-            var promiseResolved = await testPromise(true);
-            (0, _index2.default)({ ptzColorLog: 'green' }, 'promise resolved', promiseResolved);
-            var promiseRejected = await rejectPromise(false);
-            (0, _index2.default)({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
-            (0, _index2.default)({ ptzColorLog: 'red' }, 'welcome', { ptzColorLog: 'yellow' }, 'to', { ptzColorLog: 'green' }, 'polutz!');
-        });
+            }, _callee2, undefined);
+        })));
     });
 });
 describe('logInOut', function () {
