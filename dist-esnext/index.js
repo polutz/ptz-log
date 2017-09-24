@@ -17,14 +17,20 @@ const log = function log(...args) {
     let lastArg = {};
     let txt = '';
     args.map((arg, i) => {
-        if (i)
-            lastArg = args[i - 1];
+        if (i) {
+            lastArg = Object.assign({}, args[i - 1]);
+            txt += `${lastArg.hasOwnProperty('color')
+                ? ''
+                : '\n'}${color}`;
+        }
         if (arg === null || arg === undefined)
-            return txt += `${color} ${arg}`;
+            return txt += `${color}${arg} `;
         if (arg.color)
             return color = logColors[arg.color] || color || ``;
         if (arg !== '')
-            return txt += `${color} ${arg}${!lastArg.color ? '' : '\n'}`;
+            return txt += `${typeof arg === 'object'
+                ? JSON.stringify(arg, null, '\t')
+                : arg} `;
     });
     console.log(`${txt + logColors.reset}
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n`);

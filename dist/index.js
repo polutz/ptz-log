@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.logInOut = exports.log = undefined;
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -33,10 +35,13 @@ var log = function log() {
     var lastArg = {};
     var txt = '';
     args.map(function (arg, i) {
-        if (i) lastArg = args[i - 1];
-        if (arg === null || arg === undefined) return txt += color + ' ' + arg;
+        if (i) {
+            lastArg = Object.assign({}, args[i - 1]);
+            txt += '' + (lastArg.hasOwnProperty('color') ? '' : '\n') + color;
+        }
+        if (arg === null || arg === undefined) return txt += '' + color + arg + ' ';
         if (arg.color) return color = logColors[arg.color] || color || '';
-        if (arg !== '') return txt += color + ' ' + arg + (!lastArg.color ? '' : '\n');
+        if (arg !== '') return txt += ((typeof arg === 'undefined' ? 'undefined' : _typeof(arg)) === 'object' ? JSON.stringify(arg, null, '\t') : arg) + ' ';
     });
     console.log(txt + logColors.reset + '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n');
 };

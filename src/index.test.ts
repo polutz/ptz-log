@@ -49,25 +49,27 @@ describe('Log', () => {
         log({ color: 'cyan' }, 'cyan number', 666);
     });
 
-    it('should print promise ', async () => {
-        const promise = testPromise(true);
-        log({ color: 'yellow' }, 'promise pending', promise);
+    describe('Loging Objects', () => {
+        it('should print promise ', async () => {
+            const promise = testPromise(true);
+            log({ color: 'yellow' }, 'promise pending', promise);
 
-        const rejectPromise = async (fail: boolean) => {
-            try {
-                return await testPromise(false);
-            } catch (error) {
-                return error;
-            }
-        };
+            const rejectPromise = async (fail: boolean) => {
+                try {
+                    return await testPromise(false);
+                } catch (error) {
+                    return error;
+                }
+            };
 
-        const promiseResolved = await testPromise(true);
-        log({ color: 'green' }, 'promise resolved', promiseResolved);
+            const promiseResolved = await testPromise(true);
+            log({ color: 'green' }, 'promise resolved', promiseResolved);
 
-        const promiseRejected = await rejectPromise(false);
-        log({ color: 'red' }, 'promise rejected', promiseRejected);
+            const promiseRejected = await rejectPromise(false);
+            log({ color: 'red' }, 'promise rejected', promiseRejected);
 
-        log('returning', { color: 'green'}, 'true!', 'false');
+            log('returning', { color: 'green' }, 'true!', 'false');
+        });
     });
 });
 

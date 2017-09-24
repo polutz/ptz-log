@@ -48,21 +48,23 @@ describe('Log', function () {
     it('should print number ', function () {
         (0, _index2.default)({ color: 'cyan' }, 'cyan number', 666);
     });
-    it('should print promise ', async function () {
-        var promise = testPromise(true);
-        (0, _index2.default)({ color: 'yellow' }, 'promise pending', promise);
-        var rejectPromise = async function rejectPromise(fail) {
-            try {
-                return await testPromise(false);
-            } catch (error) {
-                return error;
-            }
-        };
-        var promiseResolved = await testPromise(true);
-        (0, _index2.default)({ color: 'green' }, 'promise resolved', promiseResolved);
-        var promiseRejected = await rejectPromise(false);
-        (0, _index2.default)({ color: 'red' }, 'promise rejected', promiseRejected);
-        (0, _index2.default)('returning', { color: 'green' }, 'true!', 'false');
+    describe('Loging Objects', function () {
+        it('should print promise ', async function () {
+            var promise = testPromise(true);
+            (0, _index2.default)({ color: 'yellow' }, 'promise pending', promise);
+            var rejectPromise = async function rejectPromise(fail) {
+                try {
+                    return await testPromise(false);
+                } catch (error) {
+                    return error;
+                }
+            };
+            var promiseResolved = await testPromise(true);
+            (0, _index2.default)({ color: 'green' }, 'promise resolved', promiseResolved);
+            var promiseRejected = await rejectPromise(false);
+            (0, _index2.default)({ color: 'red' }, 'promise rejected', promiseRejected);
+            (0, _index2.default)('returning', { color: 'green' }, 'true!', 'false');
+        });
     });
 });
 describe('logInOut', function () {
