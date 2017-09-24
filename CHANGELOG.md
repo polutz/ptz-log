@@ -1,5 +1,9 @@
 ## master
 
+## 1.1.0 (May 30, 2017)
+
+* Add ptzColorLog.
+
 
 ## 1.1.0 (May 30, 2017)
 

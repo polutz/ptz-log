@@ -1,14 +1,14 @@
 {
   "name": "ptz-log",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Awesome log for javascript",
   "main": "dist/index.js",
   "typings": "src/index.ts",
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
     "js": "rimraf dist-esnext && tsc && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
-    "tsc:w":"rimraf dist-esnext && tsc -w",
-    "babel:w":" rimraf dist && babel dist-esnext --watch -d dist --presets es2015",
+    "tsc:w": "rimraf dist-esnext && tsc -w",
+    "babel:w": " rimraf dist && babel dist-esnext --watch -d dist --presets es2015",
     "pretest": "npm-run-all --parallel js lint",
     "mocha": "mocha ./dist/**/*.js --require babel-polyfill",
     "mocha:w": "mocha --watch ./dist/**/*.js --require babel-polyfill",
@@ -21,6 +21,13 @@
     "url": "git+https://github.com/polutz/ptz-log.git"
   },
   "author": "github.com/angeloocana",
+  "contributors": [
+    {
+      "name": "Alan Marcell",
+      "email": "alanmarcell@live.com",
+      "url": "https://alanmarcell.github.io/"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/polutz/ptz-log/issues"
