@@ -25,7 +25,7 @@ const logColors = {
  * Available options: reset, bright, dim, underscore, blink, reverse, hidden
  * Available colors: black, red, green, yellow, blue, magenta, cyan, white
  */
-const log: ILog = function log(...args: any[]): void {
+const log: ILog = (...args: any[]): void => {
     console.log(`\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
     let ptzColorLog = ``;

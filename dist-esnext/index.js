@@ -10,7 +10,7 @@ const logColors = {
     magenta: `\x1b[35m`, cyan: `\x1b[36m`,
     white: `\x1b[37m`
 };
-const log = function log(...args) {
+const log = (...args) => {
     console.log(`\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
     let ptzColorLog = ``;
