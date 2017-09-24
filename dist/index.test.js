@@ -13,45 +13,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 describe('Log', function () {
-    it('import destructure', function () {
-        (0, _index.log)('abc_Destructure');
-        (0, _index.log)('abc_Destructure', 'def_Destructure');
-    });
     it('default log', function () {
         (0, _index2.default)('default expression');
         (0, _index2.default)('default expression another default expression');
     });
-    it('use previous color if invalid color', function () {
-        (0, _index2.default)({ color: 'green' }, { color: 'invalid' }, 'invalid color chosen, using previous');
+    it('use previous ptzColorLog if invalid ptzColorLog', function () {
+        (0, _index2.default)({ ptzColorLog: 'green' }, { ptzColorLog: 'invalid' }, 'invalid ptzColorLog chosen, using previous');
     });
     it('colored log ', function () {
-        (0, _index2.default)({ color: 'green' }, 'green expression', { color: 'yellow' }, 'yellow expression', { color: 'red' }, 'red expression');
+        (0, _index2.default)({ ptzColorLog: 'green' }, 'green expression', { ptzColorLog: 'yellow' }, 'yellow expression', { ptzColorLog: 'red' }, 'red expression');
     });
     it('should print null and undefined ', function () {
-        (0, _index2.default)({ color: 'magenta' }, 'magenta undefinded', undefined);
-        (0, _index2.default)({ color: 'yellow' }, 'yellow null', null);
+        (0, _index2.default)({ ptzColorLog: 'magenta' }, 'magenta undefinded', undefined);
+        (0, _index2.default)({ ptzColorLog: 'yellow' }, 'yellow null', null);
     });
     it('should print objects ', function () {
-        (0, _index2.default)({ color: 'green' }, 'green object', { teste: 'teste' });
+        (0, _index2.default)({ ptzColorLog: 'green' }, 'green object', { teste: 'teste' });
     });
     it('should print arrays ', function () {
-        (0, _index2.default)({ color: 'yellow' }, 'yellow array', ['wor1', 'word2']);
+        (0, _index2.default)({ ptzColorLog: 'yellow' }, 'yellow array', ['wor1', 'word2']);
     });
     it('should print functions ', function () {
-        (0, _index2.default)({ color: 'blue' }, 'blue function', function () {
+        (0, _index2.default)({ ptzColorLog: 'blue' }, 'blue function', function () {
             return ['word1', 'word2'];
         });
     });
     it('should print NaN ', function () {
-        (0, _index2.default)({ color: 'red' }, 'red NaN', NaN);
+        (0, _index2.default)({ ptzColorLog: 'red' }, 'red NaN', NaN);
     });
     it('should print number ', function () {
-        (0, _index2.default)({ color: 'cyan' }, 'cyan number', 666);
+        (0, _index2.default)({ ptzColorLog: 'cyan' }, 'cyan number', 666);
     });
     describe('Loging Objects', function () {
         it('should print promise ', async function () {
             var promise = testPromise(true);
-            (0, _index2.default)({ color: 'yellow' }, 'promise pending', promise);
+            (0, _index2.default)({ ptzColorLog: 'yellow' }, 'promise pending', promise);
             var rejectPromise = async function rejectPromise(fail) {
                 try {
                     return await testPromise(false);
@@ -60,10 +56,10 @@ describe('Log', function () {
                 }
             };
             var promiseResolved = await testPromise(true);
-            (0, _index2.default)({ color: 'green' }, 'promise resolved', promiseResolved);
+            (0, _index2.default)({ ptzColorLog: 'green' }, 'promise resolved', promiseResolved);
             var promiseRejected = await rejectPromise(false);
-            (0, _index2.default)({ color: 'red' }, 'promise rejected', promiseRejected);
-            (0, _index2.default)('returning', { color: 'green' }, 'true!', 'false');
+            (0, _index2.default)({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
+            (0, _index2.default)({ ptzColorLog: 'red' }, 'welcome', { ptzColorLog: 'yellow' }, 'to', { ptzColorLog: 'green' }, 'polutz!');
         });
     });
 });
@@ -95,4 +91,5 @@ var testPromise = function testPromise(fail) {
         }, 10);
     });
 };
+//# sourceMappingURL=index.test.js.map
 //# sourceMappingURL=index.test.js.map

@@ -31,16 +31,16 @@ var log = function log() {
 
     console.log('\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     console.log((0, _moment2.default)().format('H:mm:ss MMMM Do YYYY'));
-    var color = '';
+    var ptzColorLog = '';
     var lastArg = {};
     var txt = '';
     args.map(function (arg, i) {
         if (i) {
             lastArg = Object.assign({}, args[i - 1]);
-            txt += '' + (lastArg.hasOwnProperty('color') ? '' : '\n') + color;
+            txt += '' + (lastArg.hasOwnProperty('ptzColorLog') ? '' : '\n') + ptzColorLog;
         }
-        if (arg === null || arg === undefined) return txt += '' + color + arg + ' ';
-        if (arg.color) return color = logColors[arg.color] || color || '';
+        if (arg === null || arg === undefined) return txt += '' + ptzColorLog + arg + ' ';
+        if (arg.ptzColorLog) return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || '';
         if (arg !== '') return txt += ((typeof arg === 'undefined' ? 'undefined' : _typeof(arg)) === 'object' ? JSON.stringify(arg, null, '\t') : arg) + ' ';
     });
     console.log(txt + logColors.reset + '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n');
@@ -58,4 +58,5 @@ function logInOut(flog, fn) {
 exports.default = log;
 exports.log = log;
 exports.logInOut = logInOut;
+//# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

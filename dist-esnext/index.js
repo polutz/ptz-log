@@ -13,20 +13,20 @@ const logColors = {
 const log = function log(...args) {
     console.log(`\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
-    let color = ``;
+    let ptzColorLog = ``;
     let lastArg = {};
     let txt = '';
     args.map((arg, i) => {
         if (i) {
             lastArg = Object.assign({}, args[i - 1]);
-            txt += `${lastArg.hasOwnProperty('color')
+            txt += `${lastArg.hasOwnProperty('ptzColorLog')
                 ? ''
-                : '\n'}${color}`;
+                : '\n'}${ptzColorLog}`;
         }
         if (arg === null || arg === undefined)
-            return txt += `${color}${arg} `;
-        if (arg.color)
-            return color = logColors[arg.color] || color || ``;
+            return txt += `${ptzColorLog}${arg} `;
+        if (arg.ptzColorLog)
+            return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || ``;
         if (arg !== '')
             return txt += `${typeof arg === 'object'
                 ? JSON.stringify(arg, null, '\t')

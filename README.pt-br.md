@@ -25,8 +25,10 @@ Excelente log e tipagem para javascript e typescript!
     import log from 'ptz-log';
 
     log('hi');
-
-    log('welcome', 'to', 'polutz!');
+    // Cores são opcionais
+    log({ ptzColorLog: 'red' }, 'welcome',
+        { ptzColorLog: 'yellow' }, 'to',
+        { ptzColorLog: 'green' }, 'polutz!');
 ```
 
 Como usar o tipo Ilog como injeção de depêndencia para prover seus logs customizados
