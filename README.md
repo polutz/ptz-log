@@ -25,8 +25,10 @@ Awesome log and types for javascript and typescript!
     import log from 'ptz-log';
 
     log('hi');
-
-    log('welcome', 'to', 'polutz!');
+    // Colors are optional
+    log({ ptzColorLog: 'red' }, 'welcome',
+        { ptzColorLog: 'yellow' }, 'to',
+        { ptzColorLog: 'green' }, 'polutz!');
 ```
 
 How to use Ilog type as dependency injection, and provide your custom logs

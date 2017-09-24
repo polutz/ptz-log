@@ -1,5 +1,13 @@
 ## master
 
+## 1.2.1 (September 23, 2017)
+
+* Update package.json.
+
+## 1.2.0 (September 23, 2017)
+
+* Add ptzColorLog.
+
 
 ## 1.1.0 (May 30, 2017)
 

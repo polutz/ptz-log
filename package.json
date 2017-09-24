@@ -1,14 +1,17 @@
 {
   "name": "ptz-log",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Awesome log for javascript",
   "main": "dist/index.js",
   "typings": "src/index.ts",
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
-    "js": "rimraf dist && tsc && babel dist -d dist --presets es2015",
+    "js": "rimraf dist-esnext && tsc && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
+    "tsc:w": "rimraf dist-esnext && tsc -w",
+    "babel:w": " rimraf dist && babel dist-esnext --watch -d dist --presets es2015",
     "pretest": "npm-run-all --parallel js lint",
     "mocha": "mocha ./dist/**/*.js --require babel-polyfill",
+    "mocha:w": "mocha --watch ./dist/**/*.js --require babel-polyfill",
     "test": "nyc npm run mocha && nyc report --reporter=text-lcov > coverage.lcov && codecov --token=967f3c1a-c27c-4a43-b22a-c473b5313bf5",
     "predebug": "npm run pretest",
     "debug": "node --nolazy --debug-brk=5858 dist/index.js"
@@ -18,27 +21,34 @@
     "url": "git+https://github.com/polutz/ptz-log.git"
   },
   "author": "github.com/angeloocana",
+  "contributors": [
+    {
+      "name": "Alan Marcell",
+      "email": "alanmarcell@live.com",
+      "url": "https://alanmarcell.github.io/"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/polutz/ptz-log/issues"
   },
   "homepage": "https://github.com/polutz/ptz-log#readme",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.30",
+    "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
-    "codecov": "^2.1.0",
+    "codecov": "^2.3.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
+    "mocha": "^3.5.3",
     "mocha-lcov-reporter": "^1.3.0",
-    "npm-run-all": "^4.0.2",
-    "nyc": "^10.2.0",
-    "ptz-assert": "^1.6.3",
-    "rimraf": "^2.6.1",
-    "sinon": "^2.1.0",
-    "tslint": "^5.0.0",
-    "typescript": "^2.2.2",
-    "@types/mocha": "^2.2.40",
-    "@types/node": "^7.0.12"
+    "npm-run-all": "^4.1.1",
+    "nyc": "^11.2.1",
+    "ptz-assert": "^1.6.8",
+    "rimraf": "^2.6.2",
+    "sinon": "^3.3.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
   },
   "dependencies": {
     "moment": "^2.18.1"
