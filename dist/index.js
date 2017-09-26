@@ -36,9 +36,9 @@ var log = function log() {
     var txt = '';
     args.map(function (arg, i) {
         if (i) {
-            lastArg = Object.assign({}, args[i - 1]);
-            txt += '' + (lastArg.hasOwnProperty('ptzColorLog') ? '' : '\n') + ptzColorLog;
+            lastArg = args[i - 1];
         }
+        txt += '' + (lastArg.hasOwnProperty('ptzColorLog') || !i || arg && arg.hasOwnProperty('ptzColorLog') ? '' : '\n') + ptzColorLog;
         if (arg === null || arg === undefined) return txt += '' + ptzColorLog + arg + ' ';
         if (arg.ptzColorLog) return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || '';
         if (arg !== '') return txt += ((typeof arg === 'undefined' ? 'undefined' : _typeof(arg)) === 'object' ? JSON.stringify(arg, null, '\t') : arg) + ' ';

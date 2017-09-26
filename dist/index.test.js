@@ -17,7 +17,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 describe('Log', function () {
     it('default log', function () {
         (0, _index2.default)('default expression');
-        (0, _index2.default)('default expression another default expression');
+        (0, _index2.default)('default expression', 'another default expression');
     });
     it('use previous ptzColorLog if invalid ptzColorLog', function () {
         (0, _index2.default)({ ptzColorLog: 'green' }, { ptzColorLog: 'invalid' }, 'invalid ptzColorLog chosen, using previous');

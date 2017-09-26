@@ -18,11 +18,11 @@ const log = (...args) => {
     let txt = '';
     args.map((arg, i) => {
         if (i) {
-            lastArg = Object.assign({}, args[i - 1]);
-            txt += `${lastArg.hasOwnProperty('ptzColorLog')
-                ? ''
-                : '\n'}${ptzColorLog}`;
+            lastArg = args[i - 1];
         }
+        txt += `${lastArg.hasOwnProperty('ptzColorLog') || !i || arg && arg.hasOwnProperty('ptzColorLog')
+            ? ''
+            : '\n'}${ptzColorLog}`;
         if (arg === null || arg === undefined)
             return txt += `${ptzColorLog}${arg} `;
         if (arg.ptzColorLog)

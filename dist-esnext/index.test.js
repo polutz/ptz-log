@@ -4,7 +4,7 @@ import { logInOut } from './index';
 describe('Log', () => {
     it('default log', () => {
         log('default expression');
-        log(`default expression another default expression`);
+        log('default expression', 'another default expression');
     });
     it('use previous ptzColorLog if invalid ptzColorLog', () => {
         log({ ptzColorLog: 'green' }, { ptzColorLog: 'invalid' }, 'invalid ptzColorLog chosen, using previous');
