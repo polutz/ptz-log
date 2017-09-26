@@ -56,7 +56,6 @@ describe('Log', () => {
                 log({ ptzColorLog: 'green' }, 'promise resolved', promiseResolved);
                 const promiseRejected = await rejectPromise(false);
                 log({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
-                log({ ptzColorLog: 'red' }, 'welcome', 'to', { ptzColorLog: 'green' }, 'polutz!');
             });
         });
         describe('break line', () => {

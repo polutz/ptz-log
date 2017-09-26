@@ -40,8 +40,7 @@ var log = function log() {
         }
         var breakLine = true;
         if (i === 0) breakLine = false;
-        if (lastArg.hasOwnProperty('ptzColorLog')) breakLine = false;
-        if (lastArg.hasOwnProperty('breakLine')) breakLine = false;
+        if (lastArg.hasOwnProperty('ptzColorLog') || lastArg.hasOwnProperty('breakLine')) breakLine = false;
         if (arg && arg.hasOwnProperty('ptzColorLog')) breakLine = false;
         if (arg && arg.hasOwnProperty('breakLine')) breakLine = arg.breakLine;
         txt += '' + (breakLine === true ? '\n' : '') + ptzColorLog;

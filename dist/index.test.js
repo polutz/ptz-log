@@ -111,9 +111,8 @@ describe('Log', function () {
                                 promiseRejected = _context2.sent;
 
                                 (0, _index2.default)({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
-                                (0, _index2.default)({ ptzColorLog: 'red' }, 'welcome', 'to', { ptzColorLog: 'green' }, 'polutz!');
 
-                            case 12:
+                            case 11:
                             case 'end':
                                 return _context2.stop();
                         }

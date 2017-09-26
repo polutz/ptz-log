@@ -23,9 +23,7 @@ const log = (...args) => {
         let breakLine = true;
         if (i === 0)
             breakLine = false;
-        if (lastArg.hasOwnProperty('ptzColorLog'))
-            breakLine = false;
-        if (lastArg.hasOwnProperty('breakLine'))
+        if (lastArg.hasOwnProperty('ptzColorLog') || lastArg.hasOwnProperty('breakLine'))
             breakLine = false;
         if (arg && arg.hasOwnProperty('ptzColorLog'))
             breakLine = false;
