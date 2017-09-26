@@ -23,37 +23,37 @@ describe('Log', function () {
     });
     describe('colored', function () {
         it('should not break line after color config ', function () {
-            (0, _index2.default)({ ptzColorLog: 'green' }, 'green line 1', { ptzColorLog: 'yellow' }, 'yellow line 1', { ptzColorLog: 'red' }, 'red line 1');
+            (0, _index2.default)({ ptzLogColor: 'green' }, 'green line 1', { ptzLogColor: 'yellow' }, 'yellow line 1', { ptzLogColor: 'red' }, 'red line 1');
         });
         it('should break line after color config if break line equals true ', function () {
-            (0, _index2.default)({ ptzColorLog: 'green' }, 'green line 1', { ptzColorLog: 'yellow', breakLine: true }, 'yellow line 2', { ptzColorLog: 'red' }, 'red line 2');
+            (0, _index2.default)({ ptzLogColor: 'green' }, 'green line 1', { ptzLogColor: 'yellow', breakLine: true }, 'yellow line 2', { ptzLogColor: 'red' }, 'red line 2');
         });
         it('should not break line after color config if break line equals false ', function () {
-            (0, _index2.default)({ ptzColorLog: 'green' }, 'green expression', { ptzColorLog: 'yellow', breakLine: false }, 'yellow expression', { ptzColorLog: 'red' }, 'red expression');
+            (0, _index2.default)({ ptzLogColor: 'green' }, 'green expression', { ptzLogColor: 'yellow', breakLine: false }, 'yellow expression', { ptzLogColor: 'red' }, 'red expression');
         });
-        it('use previous ptzColorLog if invalid ptzColorLog', function () {
-            (0, _index2.default)({ ptzColorLog: 'green' }, { ptzColorLog: 'invalid' }, 'invalid ptzColorLog chosen, using previous');
+        it('use previous ptzLogColor if invalid ptzLogColor', function () {
+            (0, _index2.default)({ ptzLogColor: 'green' }, { ptzLogColor: 'invalid' }, 'invalid ptzLogColor chosen, using previous');
         });
         it('should print null and undefined ', function () {
-            (0, _index2.default)({ ptzColorLog: 'magenta' }, 'magenta undefinded', undefined);
-            (0, _index2.default)({ ptzColorLog: 'yellow' }, 'yellow null', null);
+            (0, _index2.default)({ ptzLogColor: 'magenta' }, 'magenta undefinded', undefined);
+            (0, _index2.default)({ ptzLogColor: 'yellow' }, 'yellow null', null);
         });
         it('should print objects ', function () {
-            (0, _index2.default)({ ptzColorLog: 'green' }, 'green object', { teste: 'teste' });
+            (0, _index2.default)({ ptzLogColor: 'green' }, 'green object', { teste: 'teste' });
         });
         it('should print arrays ', function () {
-            (0, _index2.default)({ ptzColorLog: 'yellow' }, 'yellow array', ['wor1', 'word2']);
+            (0, _index2.default)({ ptzLogColor: 'yellow' }, 'yellow array', ['wor1', 'word2']);
         });
         it('should print functions ', function () {
-            (0, _index2.default)({ ptzColorLog: 'blue' }, 'blue function', function () {
+            (0, _index2.default)({ ptzLogColor: 'blue' }, 'blue function', function () {
                 return ['word1', 'word2'];
             });
         });
         it('should print NaN ', function () {
-            (0, _index2.default)({ ptzColorLog: 'red' }, 'red NaN', NaN);
+            (0, _index2.default)({ ptzLogColor: 'red' }, 'red NaN', NaN);
         });
         it('should print number ', function () {
-            (0, _index2.default)({ ptzColorLog: 'cyan' }, 'cyan number', 666);
+            (0, _index2.default)({ ptzLogColor: 'cyan' }, 'cyan number', 666);
         });
         describe('Loging Objects', function () {
             it('should print promise ', _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
@@ -64,7 +64,7 @@ describe('Log', function () {
                             case 0:
                                 promise = testPromise(true);
 
-                                (0, _index2.default)({ ptzColorLog: 'yellow' }, 'promise pending', promise);
+                                (0, _index2.default)({ ptzLogColor: 'yellow' }, 'promise pending', promise);
 
                                 rejectPromise = function () {
                                     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(fail) {
@@ -103,14 +103,14 @@ describe('Log', function () {
                             case 5:
                                 promiseResolved = _context2.sent;
 
-                                (0, _index2.default)({ ptzColorLog: 'green' }, 'promise resolved', promiseResolved);
+                                (0, _index2.default)({ ptzLogColor: 'green' }, 'promise resolved', promiseResolved);
                                 _context2.next = 9;
                                 return rejectPromise(false);
 
                             case 9:
                                 promiseRejected = _context2.sent;
 
-                                (0, _index2.default)({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
+                                (0, _index2.default)({ ptzLogColor: 'red' }, 'promise rejected', promiseRejected);
 
                             case 11:
                             case 'end':
@@ -122,10 +122,10 @@ describe('Log', function () {
         });
         describe('break line', function () {
             it('should not break line if breakLine equals false', function () {
-                (0, _index2.default)('line 1', { breakLine: false }, { ptzColorLog: 'red' }, 'still line 1');
+                (0, _index2.default)('line 1', { breakLine: false }, 'still line 1');
             });
             it('should break line if breakLine equals true', function () {
-                (0, _index2.default)('line 1', { breakLine: true }, { ptzColorLog: 'red' }, 'line 2');
+                (0, _index2.default)('line 1', { breakLine: true }, { ptzLogColor: 'red' }, 'line 2');
             });
         });
     });

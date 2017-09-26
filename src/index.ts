@@ -2,8 +2,9 @@ import moment from 'moment';
 
 /**
  * Log function type
+ *
  */
-type ILog = (colors, ...args: any[]) => void;
+type ILog = (...args: any[]) => void;
 
 const logColors = {
     // Options
@@ -19,43 +20,51 @@ const logColors = {
     white: `\x1b[37m`
 };
 
+export interface IPtzLogConfig {
+    ptzLogColor: string;
+    breakLine: boolean;
+}
+const BreakLine = (i, lastArg, arg) => {
+    let bl = notBreakFirstLine(i);
+    bl = arg && arg!.hasOwnProperty('breakLine') ? arg.breakLine : notBreakAfterConfig(lastArg, arg);
+    return bl;
+};
+
+const notBreakFirstLine = (n: number): boolean => n === 0;
+
+const notBreakAfterConfig = (lastArg, arg): boolean =>
+    !(lastArg && lastArg.hasOwnProperty('ptzLogColor')
+        || arg && arg.hasOwnProperty('ptzLogColor')
+        || lastArg && lastArg.hasOwnProperty('breakLine')
+    );
+
 /**
  * Colored log function
  *
- * Available options: reset, bright, dim, underscore, blink, reverse, hidden
- * Available colors: black, red, green, yellow, blue, magenta, cyan, white
+ * @param {IPtzLogConfig} ptzLogConfig
  */
-const log: ILog = (...args: any[]): void => {
+const log = (...args): void => {
     console.log(`\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
-    let ptzColorLog = ``;
+    let ptzLogColor = ``;
     let lastArg: any = {};
     let txt = '';
     args.map((arg, i) => {
-        if (i) {
-            lastArg = args[i - 1];
+        // Store last arg
+        if (i) lastArg = args[i - 1];
 
-        }
-        let breakLine = true;
-        if (i === 0)
-            breakLine = false;
-        if (lastArg.hasOwnProperty('ptzColorLog') || lastArg.hasOwnProperty('breakLine'))
-            breakLine = false;
-        if (arg && arg.hasOwnProperty('ptzColorLog'))
-            breakLine = false;
-        if (arg && arg.hasOwnProperty('breakLine'))
-            breakLine = arg.breakLine;
+        const breakLine = BreakLine(i, lastArg, arg);
 
         txt += `${breakLine === true
             ? '\n'
             : ''}${
-            ptzColorLog}`;
+            ptzLogColor}`;
 
         if (arg === null || arg === undefined)
-            return txt += `${ptzColorLog}${arg} `;
+            return txt += `${ptzLogColor}${arg} `;
 
-        if (arg.ptzColorLog || arg.hasOwnProperty('breakLine'))
-            return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || ``;
+        if (arg.ptzLogColor || arg!.hasOwnProperty('breakLine'))
+            return ptzLogColor = logColors[arg.ptzLogColor] || ptzLogColor || ``;
 
         if (arg !== '')
             return txt += `${

@@ -10,32 +10,32 @@ const logColors = {
     magenta: `\x1b[35m`, cyan: `\x1b[36m`,
     white: `\x1b[37m`
 };
+const BreakLine = (i, lastArg, arg) => {
+    let bl = notBreakFirstLine(i);
+    bl = arg && arg.hasOwnProperty('breakLine') ? arg.breakLine : notBreakAfterConfig(lastArg, arg);
+    return bl;
+};
+const notBreakFirstLine = (n) => n === 0;
+const notBreakAfterConfig = (lastArg, arg) => !(lastArg && lastArg.hasOwnProperty('ptzLogColor')
+    || arg && arg.hasOwnProperty('ptzLogColor')
+    || lastArg && lastArg.hasOwnProperty('breakLine'));
 const log = (...args) => {
     console.log(`\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
     console.log(moment().format('H:mm:ss MMMM Do YYYY'));
-    let ptzColorLog = ``;
+    let ptzLogColor = ``;
     let lastArg = {};
     let txt = '';
     args.map((arg, i) => {
-        if (i) {
+        if (i)
             lastArg = args[i - 1];
-        }
-        let breakLine = true;
-        if (i === 0)
-            breakLine = false;
-        if (lastArg.hasOwnProperty('ptzColorLog') || lastArg.hasOwnProperty('breakLine'))
-            breakLine = false;
-        if (arg && arg.hasOwnProperty('ptzColorLog'))
-            breakLine = false;
-        if (arg && arg.hasOwnProperty('breakLine'))
-            breakLine = arg.breakLine;
+        const breakLine = BreakLine(i, lastArg, arg);
         txt += `${breakLine === true
             ? '\n'
-            : ''}${ptzColorLog}`;
+            : ''}${ptzLogColor}`;
         if (arg === null || arg === undefined)
-            return txt += `${ptzColorLog}${arg} `;
-        if (arg.ptzColorLog || arg.hasOwnProperty('breakLine'))
-            return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || ``;
+            return txt += `${ptzLogColor}${arg} `;
+        if (arg.ptzLogColor || arg.hasOwnProperty('breakLine'))
+            return ptzLogColor = logColors[arg.ptzLogColor] || ptzLogColor || ``;
         if (arg !== '')
             return txt += `${typeof arg === 'object'
                 ? JSON.stringify(arg, null, '\t')

@@ -24,6 +24,17 @@ var logColors = {
     magenta: '\x1B[35m', cyan: '\x1B[36m',
     white: '\x1B[37m'
 };
+var BreakLine = function BreakLine(i, lastArg, arg) {
+    var bl = notBreakFirstLine(i);
+    bl = arg && arg.hasOwnProperty('breakLine') ? arg.breakLine : notBreakAfterConfig(lastArg, arg);
+    return bl;
+};
+var notBreakFirstLine = function notBreakFirstLine(n) {
+    return n === 0;
+};
+var notBreakAfterConfig = function notBreakAfterConfig(lastArg, arg) {
+    return !(lastArg && lastArg.hasOwnProperty('ptzLogColor') || arg && arg.hasOwnProperty('ptzLogColor') || lastArg && lastArg.hasOwnProperty('breakLine'));
+};
 var log = function log() {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
@@ -31,21 +42,15 @@ var log = function log() {
 
     console.log('\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
     console.log((0, _moment2.default)().format('H:mm:ss MMMM Do YYYY'));
-    var ptzColorLog = '';
+    var ptzLogColor = '';
     var lastArg = {};
     var txt = '';
     args.map(function (arg, i) {
-        if (i) {
-            lastArg = args[i - 1];
-        }
-        var breakLine = true;
-        if (i === 0) breakLine = false;
-        if (lastArg.hasOwnProperty('ptzColorLog') || lastArg.hasOwnProperty('breakLine')) breakLine = false;
-        if (arg && arg.hasOwnProperty('ptzColorLog')) breakLine = false;
-        if (arg && arg.hasOwnProperty('breakLine')) breakLine = arg.breakLine;
-        txt += '' + (breakLine === true ? '\n' : '') + ptzColorLog;
-        if (arg === null || arg === undefined) return txt += '' + ptzColorLog + arg + ' ';
-        if (arg.ptzColorLog || arg.hasOwnProperty('breakLine')) return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || '';
+        if (i) lastArg = args[i - 1];
+        var breakLine = BreakLine(i, lastArg, arg);
+        txt += '' + (breakLine === true ? '\n' : '') + ptzLogColor;
+        if (arg === null || arg === undefined) return txt += '' + ptzLogColor + arg + ' ';
+        if (arg.ptzLogColor || arg.hasOwnProperty('breakLine')) return ptzLogColor = logColors[arg.ptzLogColor] || ptzLogColor || '';
         if (arg !== '') return txt += ((typeof arg === 'undefined' ? 'undefined' : _typeof(arg)) === 'object' ? JSON.stringify(arg, null, '\t') : arg) + ' ';
     });
     console.log(txt + logColors.reset + '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n');
