@@ -21,7 +21,7 @@ describe('Log', () => {
                 { ptzColorLog: 'yellow', breakLine: true }, 'yellow line 2',
                 { ptzColorLog: 'red' }, 'red line 2');
         });
-        it('should not break line after color config if break line equals true ', () => {
+        it('should not break line after color config if break line equals false ', () => {
             log({ ptzColorLog: 'green' }, 'green expression',
                 { ptzColorLog: 'yellow', breakLine: false }, 'yellow expression',
                 { ptzColorLog: 'red' }, 'red expression');
@@ -73,14 +73,14 @@ describe('Log', () => {
 
                 const promiseRejected = await rejectPromise(false);
                 log({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
-
-                log({ ptzColorLog: 'red' }, 'welcome', 'to',
-                    { ptzColorLog: 'green' }, 'polutz!');
             });
         });
         describe('break line', () => {
             it('should not break line if breakLine equals false', () => {
-                log('line 1', { breakLine: false }, 'still line 1');
+                log('line 1', { breakLine: false }, { ptzColorLog: 'red' }, 'still line 1');
+            });
+            it('should break line if breakLine equals true', () => {
+                log('line 1', { breakLine: true }, { ptzColorLog: 'red' }, 'line 2');
             });
         });
     });

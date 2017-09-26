@@ -38,7 +38,13 @@ var log = function log() {
         if (i) {
             lastArg = args[i - 1];
         }
-        txt += '' + (lastArg.hasOwnProperty('ptzColorLog') || !i || arg && arg.hasOwnProperty('ptzColorLog') && arg.breakLine !== true ? '' : '\n') + ptzColorLog;
+        var breakLine = true;
+        if (i === 0) breakLine = false;
+        if (lastArg.hasOwnProperty('ptzColorLog')) breakLine = false;
+        if (lastArg.hasOwnProperty('breakLine')) breakLine = false;
+        if (arg && arg.hasOwnProperty('ptzColorLog')) breakLine = false;
+        if (arg && arg.hasOwnProperty('breakLine')) breakLine = arg.breakLine;
+        txt += '' + (breakLine === true ? '\n' : '') + ptzColorLog;
         if (arg === null || arg === undefined) return txt += '' + ptzColorLog + arg + ' ';
         if (arg.ptzColorLog || arg.hasOwnProperty('breakLine')) return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || '';
         if (arg !== '') return txt += ((typeof arg === 'undefined' ? 'undefined' : _typeof(arg)) === 'object' ? JSON.stringify(arg, null, '\t') : arg) + ' ';

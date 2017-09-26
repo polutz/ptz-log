@@ -28,7 +28,7 @@ describe('Log', function () {
         it('should break line after color config if break line equals true ', function () {
             (0, _index2.default)({ ptzColorLog: 'green' }, 'green line 1', { ptzColorLog: 'yellow', breakLine: true }, 'yellow line 2', { ptzColorLog: 'red' }, 'red line 2');
         });
-        it('should not break line after color config if break line equals true ', function () {
+        it('should not break line after color config if break line equals false ', function () {
             (0, _index2.default)({ ptzColorLog: 'green' }, 'green expression', { ptzColorLog: 'yellow', breakLine: false }, 'yellow expression', { ptzColorLog: 'red' }, 'red expression');
         });
         it('use previous ptzColorLog if invalid ptzColorLog', function () {
@@ -123,7 +123,10 @@ describe('Log', function () {
         });
         describe('break line', function () {
             it('should not break line if breakLine equals false', function () {
-                (0, _index2.default)('line 1', { breakLine: false }, 'still line 1');
+                (0, _index2.default)('line 1', { breakLine: false }, { ptzColorLog: 'red' }, 'still line 1');
+            });
+            it('should break line if breakLine equals true', function () {
+                (0, _index2.default)('line 1', { breakLine: true }, { ptzColorLog: 'red' }, 'line 2');
             });
         });
     });
