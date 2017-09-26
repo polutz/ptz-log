@@ -3,69 +3,85 @@ import log from './index';
 import { logInOut } from './index';
 
 describe('Log', () => {
-    it('default log', () => {
-        log('default expression');
-        log('default expression', 'another default expression');
+    describe('default', () => {
+        it('should break line after every arg', () => {
+            log('line 1');
+            log('line 1', 'line 2');
+        });
     });
 
-    it('use previous ptzColorLog if invalid ptzColorLog', () => {
-        log({ ptzColorLog: 'green' }, { ptzColorLog: 'invalid' }, 'invalid ptzColorLog chosen, using previous');
-    });
+    describe('colored', () => {
+        it('should not break line after color config ', () => {
+            log({ ptzColorLog: 'green' }, 'green line 1',
+                { ptzColorLog: 'yellow' }, 'yellow line 1',
+                { ptzColorLog: 'red' }, 'red line 1');
+        });
+        it('should break line after color config if break line equals true ', () => {
+            log({ ptzColorLog: 'green' }, 'green line 1',
+                { ptzColorLog: 'yellow', breakLine: true }, 'yellow line 2',
+                { ptzColorLog: 'red' }, 'red line 2');
+        });
+        it('should not break line after color config if break line equals true ', () => {
+            log({ ptzColorLog: 'green' }, 'green expression',
+                { ptzColorLog: 'yellow', breakLine: false }, 'yellow expression',
+                { ptzColorLog: 'red' }, 'red expression');
+        });
+        it('use previous ptzColorLog if invalid ptzColorLog', () => {
+            log({ ptzColorLog: 'green' }, { ptzColorLog: 'invalid' }, 'invalid ptzColorLog chosen, using previous');
+        });
 
-    it('colored log ', () => {
-        log({ ptzColorLog: 'green' }, 'green expression',
-            { ptzColorLog: 'yellow' }, 'yellow expression',
-            { ptzColorLog: 'red' }, 'red expression');
+        it('should print null and undefined ', () => {
+            log({ ptzColorLog: 'magenta' }, 'magenta undefinded', undefined);
+            log({ ptzColorLog: 'yellow' }, 'yellow null', null);
+        });
 
-    });
+        it('should print objects ', () => {
+            log({ ptzColorLog: 'green' }, 'green object', { teste: 'teste' });
+        });
 
-    it('should print null and undefined ', () => {
-        log({ ptzColorLog: 'magenta' }, 'magenta undefinded', undefined);
-        log({ ptzColorLog: 'yellow' }, 'yellow null', null);
-    });
+        it('should print arrays ', () => {
+            log({ ptzColorLog: 'yellow' }, 'yellow array', ['wor1', 'word2']);
+        });
 
-    it('should print objects ', () => {
-        log({ ptzColorLog: 'green' }, 'green object', { teste: 'teste' });
-    });
+        it('should print functions ', () => {
+            log({ ptzColorLog: 'blue' }, 'blue function', () => ['word1', 'word2']);
+        });
 
-    it('should print arrays ', () => {
-        log({ ptzColorLog: 'yellow' }, 'yellow array', ['wor1', 'word2']);
-    });
+        it('should print NaN ', () => {
+            log({ ptzColorLog: 'red' }, 'red NaN', NaN);
+        });
 
-    it('should print functions ', () => {
-        log({ ptzColorLog: 'blue' }, 'blue function', () => ['word1', 'word2']);
-    });
+        it('should print number ', () => {
+            log({ ptzColorLog: 'cyan' }, 'cyan number', 666);
+        });
 
-    it('should print NaN ', () => {
-        log({ ptzColorLog: 'red' }, 'red NaN', NaN);
-    });
+        describe('Loging Objects', () => {
+            it('should print promise ', async () => {
+                const promise = testPromise(true);
+                log({ ptzColorLog: 'yellow' }, 'promise pending', promise);
 
-    it('should print number ', () => {
-        log({ ptzColorLog: 'cyan' }, 'cyan number', 666);
-    });
+                const rejectPromise = async (fail: boolean) => {
+                    try {
+                        return await testPromise(false);
+                    } catch (error) {
+                        return error;
+                    }
+                };
 
-    describe('Loging Objects', () => {
-        it('should print promise ', async () => {
-            const promise = testPromise(true);
-            log({ ptzColorLog: 'yellow' }, 'promise pending', promise);
+                const promiseResolved = await testPromise(true);
+                log({ ptzColorLog: 'green' }, 'promise resolved', promiseResolved);
 
-            const rejectPromise = async (fail: boolean) => {
-                try {
-                    return await testPromise(false);
-                } catch (error) {
-                    return error;
-                }
-            };
+                const promiseRejected = await rejectPromise(false);
+                log({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
 
-            const promiseResolved = await testPromise(true);
-            log({ ptzColorLog: 'green' }, 'promise resolved', promiseResolved);
-
-            const promiseRejected = await rejectPromise(false);
-            log({ ptzColorLog: 'red' }, 'promise rejected', promiseRejected);
-
-            log({ ptzColorLog: 'red' }, 'welcome',
-                { ptzColorLog: 'yellow' }, 'to',
-                { ptzColorLog: 'green' }, 'polutz!');
+                log({ ptzColorLog: 'red' }, 'welcome', 'to',
+                    { ptzColorLog: 'green' }, 'polutz!');
+            });
+        });
+        describe('break line', () => {
+            it('should not break line if breakLine equals false', () => {
+                log('line 1', { breakLine: false }, 'still line 1');
+            });
         });
     });
 });

@@ -20,12 +20,15 @@ const log = (...args) => {
         if (i) {
             lastArg = args[i - 1];
         }
-        txt += `${lastArg.hasOwnProperty('ptzColorLog') || !i || arg && arg.hasOwnProperty('ptzColorLog')
+        txt += `${lastArg.hasOwnProperty('ptzColorLog')
+            || !i
+            || arg && arg.hasOwnProperty('ptzColorLog')
+                && arg.breakLine !== true
             ? ''
             : '\n'}${ptzColorLog}`;
         if (arg === null || arg === undefined)
             return txt += `${ptzColorLog}${arg} `;
-        if (arg.ptzColorLog)
+        if (arg.ptzColorLog || arg.hasOwnProperty('breakLine'))
             return ptzColorLog = logColors[arg.ptzColorLog] || ptzColorLog || ``;
         if (arg !== '')
             return txt += `${typeof arg === 'object'
