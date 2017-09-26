@@ -1,5 +1,9 @@
 ## master
 
+## 1.2.2@beta (September 26, 2017)
+
+* Add breakLine option.
+
 ## 1.2.1 (September 23, 2017)
 
 * Update package.json.
